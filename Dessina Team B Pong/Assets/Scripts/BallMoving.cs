@@ -6,7 +6,7 @@ public class BallMoving : MonoBehaviour
 {
     public float ballSpeed = 50f;
     public int RLDirection = 1;
-    public int UDDirection = 1;
+    public int UDDirection = -1;
     public bool StartMove = false;
 
     // Start is called before the first frame update

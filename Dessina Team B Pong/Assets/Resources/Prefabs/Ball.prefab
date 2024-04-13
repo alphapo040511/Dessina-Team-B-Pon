@@ -101,7 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballSpeed: 20
   RLDirection: 1
-  UDDirection: 1
+  UDDirection: -1
+  StartMove: 0
 --- !u!58 &2727855162548171418
 CircleCollider2D:
   m_ObjectHideFlags: 0

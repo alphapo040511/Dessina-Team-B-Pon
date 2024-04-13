@@ -7,15 +7,16 @@ TagManager:
   - Wall
   - LeftPlayer
   - RightPlayer
+  - Ball
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BackGroundUI
   - Water
   - UI
-  - 
-  - 
+  - Canvas
+  - BackGround
   - 
   - 
   - 
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PointUI
+    uniqueID: 1634908557
+    locked: 0
+  - name: Player
+    uniqueID: 177398755
     locked: 0
