@@ -30,6 +30,8 @@ public class BallMoving : MonoBehaviour
         if(collision.transform.tag == "Player")
         {
             RLDirection *= -1;
+         
+            ballSpeed += 3f;            //Player에 닿을 때마다 공의 속도가 3씩 증가함
         }
 
         if (collision.transform.tag == "Wall")

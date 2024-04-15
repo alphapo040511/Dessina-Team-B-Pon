@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RightPlayerControl : MonoBehaviour
 {
-    public float moveSpeed = 10f;
+    public float moveSpeed = 20f;
     Vector2 moveDir;
 
     // Start is called before the first frame update
