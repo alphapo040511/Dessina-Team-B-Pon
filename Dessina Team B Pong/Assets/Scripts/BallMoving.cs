@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BallMoving : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class BallMoving : MonoBehaviour
     public int RLDirection = 1;
     public int UDDirection = -1;
     public bool StartMove = false;
+    public Renderer ball;
+    public float duration = 2f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ball.material.DOFade(0f, duration).SetLoops(-1, LoopType.Yoyo);
     }
 
     // Update is called once per frame
@@ -21,22 +25,24 @@ public class BallMoving : MonoBehaviour
         if (StartMove == true)
         {
             transform.Translate(new Vector2(ballSpeed * RLDirection * Time.deltaTime, ballSpeed * UDDirection * Time.deltaTime));
+
+
         }
     }
 
-  
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player")
         {
-            RLDirection *= -1;
-         
+            RLDirection = -1;
+
             ballSpeed += 3f;            //Player에 닿을 때마다 공의 속도가 3씩 증가함
         }
 
         if (collision.transform.tag == "Wall")
         {
-            UDDirection *= -1;
+            UDDirection = -1;
         }
     }
 
