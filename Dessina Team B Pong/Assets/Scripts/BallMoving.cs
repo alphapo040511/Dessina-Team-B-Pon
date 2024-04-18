@@ -16,7 +16,16 @@ public class BallMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ball.material.DOFade(0f, duration).SetLoops(-1, LoopType.Yoyo);
+        //ball.material.DOFade(0f, duration).SetLoops(-1, LoopType.Yoyo);
+        Sequence mysquence = DOTween.Sequence();
+
+        mysquence.Append(ball.material.DOFade(0f, 0.5f));
+      
+        mysquence.AppendInterval(1.0f);
+
+        mysquence.Append(ball.material.DOFade(0.35f, 0.5f));
+        mysquence.SetLoops(-1, LoopType.Yoyo);
+
     }
 
     // Update is called once per frame
