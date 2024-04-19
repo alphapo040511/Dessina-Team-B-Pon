@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class BallManager : MonoBehaviour
 {
     public GameObject gameManager;
+    public GameObject rightP;
+    public GameObject leftP;
     public GameObject ball;
     public Text countUI;
     private bool isStart = false;
@@ -19,9 +21,6 @@ public class BallManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-/*        ball = Resources.Load<GameObject>("Prefabs/Ball");
-        ball = Instantiate(ball);
-        ball.transform.position = new Vector2(0, 10);*/
 
     }
 
@@ -32,7 +31,9 @@ public class BallManager : MonoBehaviour
         if (gameManager.GetComponent<GameManagr>().gameStart == true && isStart == false)
         {
             isStart = true;
-            if (gameManager.GetComponent<GameManagr>().gameMode == 3)
+            rightP.SetActive(true);
+            leftP.SetActive(true);
+            if (gameManager.GetComponent<GameManagr>().gameMode == 2)
             {
                 Wall.SetActive(true);
             }
@@ -44,14 +45,17 @@ public class BallManager : MonoBehaviour
 
     public void Spawn()
     {
-        // 공 프리팹을 리소스에서 로드합니다.
-        ball = Resources.Load<GameObject>("Prefabs/Ball");
-        // 로드한 프리팹을 복제하여 실제 게임 오브젝트를 생성합니다.
-        ball = Instantiate(ball);
-        // 생성된 공의 초기 위치를 설정합니다.
-        ball.transform.position = new Vector2(0, 10);
-        // 카운트다운 코루틴을 시작합니다.
-        StartCoroutine(StartBall());
+        if (gameManager.GetComponent<GameManagr>().gameStart == true)
+        {
+            // 공 프리팹을 리소스에서 로드합니다.
+            ball = Resources.Load<GameObject>("Prefabs/Ball");
+            // 로드한 프리팹을 복제하여 실제 게임 오브젝트를 생성합니다.
+            ball = Instantiate(ball);
+            // 생성된 공의 초기 위치를 설정합니다.
+            ball.transform.position = new Vector2(0, 10);
+            // 카운트다운 코루틴을 시작합니다.
+            StartCoroutine(StartBall());
+        }
     }
 
     private IEnumerator StartBall()

@@ -28,7 +28,7 @@ public class PointManager : MonoBehaviour
     }
 
     private void Respawn()
-    {
+    {if(point <3)
         ballManager.GetComponent<BallManager>().Spawn();
     }
 }

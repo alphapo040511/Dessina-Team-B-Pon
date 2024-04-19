@@ -7,7 +7,7 @@ using DG.Tweening;
 public class BallMoving : MonoBehaviour
 {
     public float ballSpeed = 50f;
-    public int RLDirection = 1;
+    public int RLDirection;
     public int UDDirection = -1;
     public bool StartMove = false;
     public Renderer ball;
@@ -20,6 +20,10 @@ public class BallMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int RL = Random.Range(0, 2);
+        if (RL == 0) RLDirection = -1;
+        if (RL == 1) RLDirection = 1;
+
         Manager = GameObject.Find("GameManager");
 
         mode = Manager.GetComponent<GameManagr>().gameMode;
@@ -62,7 +66,7 @@ public class BallMoving : MonoBehaviour
 
             if(mode == 4) 
             {
-                ballSpeed = Random.Range(40f, 60f);
+                ballSpeed = Random.Range(10f,30f);
             }
         }
 

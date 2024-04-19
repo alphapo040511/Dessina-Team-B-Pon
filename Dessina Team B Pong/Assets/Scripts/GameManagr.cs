@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManagr : MonoBehaviour
 {
     public bool Roulette = true;
-    public GameManagr leftPoint;
-    public GameManagr rightPoint;
+    public GameObject leftPoint;
+    public GameObject rightPoint;
     public int gameMode;
     public float checkTime;
     public bool input = false;
@@ -17,19 +18,37 @@ public class GameManagr : MonoBehaviour
     public Image gamemodeImage;
     public Image gamemodeImage2;
     public bool gameStart = false;
+    public GameObject rightWin;
+    public GameObject leftWin;
+    private int stopNumber;
+    public int stopMode;
 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RouletteTimer());
+        stopNumber = Random.Range(1000, 1200);
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        if (Input.GetKeyDown(KeyCode.Space) && input == true)
+       if(rightPoint.GetComponent<PointManager>().point == 3)
+        {
+            gameStart = false;
+            leftWin.SetActive(true);
+            Invoke("GameEnd", 3);
+        }
+
+        if (leftPoint.GetComponent<PointManager>().point == 3)
+        {
+            gameStart = false;
+            rightWin.SetActive(true);
+            Invoke("GameEnd", 3);
+        }
+
+        if (stopMode >= stopNumber)
         {
             Roulette = false;
             Invoke("GameStart", 1.5f);
@@ -38,22 +57,25 @@ public class GameManagr : MonoBehaviour
         if(checkTime >= 0.1f)
         {
             gameMode = 1;
+            stopMode++;
             gamemodetext.text = "SpeedUp";
-            input = true;
         }
         if (checkTime >= 0.2f)
         {
             gameMode = 2;
+            stopMode++;
             gamemodetext.text = "Wall";
         }
         if (checkTime >= 0.3f)
         {
             gameMode = 3;
+            stopMode++;
             gamemodetext.text = "InvisibleBall";
         }
         if (checkTime >= 0.4f)
         {
             gameMode = 4;
+            stopMode++;
             gamemodetext.text = "RandomSpeed";
             checkTime = 0;
         }
@@ -74,5 +96,10 @@ public class GameManagr : MonoBehaviour
         gamemodetext.DOFade(0f, 2f);
         gamemodeImage2.DOFade(0f, 2f);
         gamemodeImage.DOFade(0f, 2f).OnComplete(() => gameStart = true);
+    }
+
+    void GameEnd()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
