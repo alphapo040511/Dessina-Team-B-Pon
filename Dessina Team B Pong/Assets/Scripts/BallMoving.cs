@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+
 public class BallMoving : MonoBehaviour
 {
     public float ballSpeed = 50f;
@@ -11,20 +12,32 @@ public class BallMoving : MonoBehaviour
     public bool StartMove = false;
     public Renderer ball;
     public float duration = 2f;
+    public GameObject Manager;
+    private int mode;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //ball.material.DOFade(0f, duration).SetLoops(-1, LoopType.Yoyo);
-        Sequence mysquence = DOTween.Sequence();
+        Manager = GameObject.Find("GameManager");
 
-        mysquence.Append(ball.material.DOFade(0f, 0.5f));
-      
-        mysquence.AppendInterval(1.0f);
+        mode = Manager.GetComponent<GameManagr>().gameMode;
 
-        mysquence.Append(ball.material.DOFade(0.35f, 0.5f));
-        mysquence.SetLoops(-1, LoopType.Yoyo);
+        if(mode == 3)
+        {
+            Sequence mysquence = DOTween.Sequence();
+
+            mysquence.Append(ball.material.DOFade(0f, 0.5f));
+
+            mysquence.AppendInterval(0.5f);
+
+            mysquence.Append(ball.material.DOFade(1f, 0.5f));
+
+            mysquence.AppendInterval(0.5f);
+
+            mysquence.SetLoops(-1);
+        }
 
     }
 
@@ -34,8 +47,6 @@ public class BallMoving : MonoBehaviour
         if (StartMove == true)
         {
             transform.Translate(new Vector2(ballSpeed * RLDirection * Time.deltaTime, ballSpeed * UDDirection * Time.deltaTime));
-
-
         }
     }
 
@@ -44,14 +55,20 @@ public class BallMoving : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            RLDirection = -1;
+            RLDirection *= -1;
 
+            if(mode == 1)
             ballSpeed += 3f;            //Player에 닿을 때마다 공의 속도가 3씩 증가함
+
+            if(mode == 4) 
+            {
+                ballSpeed = Random.Range(40f, 60f);
+            }
         }
 
         if (collision.transform.tag == "Wall")
         {
-            UDDirection = -1;
+            UDDirection *= -1;
         }
     }
 

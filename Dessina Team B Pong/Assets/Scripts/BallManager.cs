@@ -7,8 +7,11 @@ using UnityEngine.UI;
 
 public class BallManager : MonoBehaviour
 {
+    public GameObject gameManager;
     public GameObject ball;
     public Text countUI;
+    private bool isStart = false;
+    public GameObject Wall;
 
     //WallMoving 에서 사용할 수 있도록 public으로 변수 선언
     public float checkTime = 0;         // 카운트다운을 체크하는 시간 변수 선언
@@ -16,15 +19,26 @@ public class BallManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ball = Resources.Load<GameObject>("Prefabs/Ball");
+/*        ball = Resources.Load<GameObject>("Prefabs/Ball");
         ball = Instantiate(ball);
-        ball.transform.position = new Vector2(0, 10);
-        StartCoroutine(StartBall());
+        ball.transform.position = new Vector2(0, 10);*/
+
     }
 
     // Update is called once per frame
     void Update()
     {
+       
+        if (gameManager.GetComponent<GameManagr>().gameStart == true && isStart == false)
+        {
+            isStart = true;
+            if (gameManager.GetComponent<GameManagr>().gameMode == 3)
+            {
+                Wall.SetActive(true);
+            }
+            Spawn();
+            //StartCoroutine(StartBall());
+        }
 
     }
 
