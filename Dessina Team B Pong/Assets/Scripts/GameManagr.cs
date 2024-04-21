@@ -78,28 +78,28 @@ public class GameManagr : MonoBehaviour
             gamemodeImage2.gameObject.SetActive(true);
             gameMode = 1;
             stopMode++;
-            gamemodetext.text = "SpeedUp";
+            gamemodetext.text = "[소방차는멈추지않아BRO]\r\n공이 부딪힐때마다 속도가 빨라집니다!";
         }
         if (checkTime >= 0.2f)
         {
             thisImage.sprite = wall_Image;
             gameMode = 2;
             stopMode++;
-            gamemodetext.text = "Wall";
+            gamemodetext.text = "[넌 못찌나간다아아아아ㅏ]\r\n스테이지 중앙에 움직이는 벽이생깁니다!";
         }
         if (checkTime >= 0.3f)
         {
             thisImage.sprite = invisibleBall_Image;
             gameMode = 3;
             stopMode++;
-            gamemodetext.text = "InvisibleBall";
+            gamemodetext.text = "[어뭐야 이거왜 투명해져]\r\n공이 중간중간 투명해집니다!";
         }
         if (checkTime >= 0.4f)
         {
             thisImage.sprite = randomSpeed_Image;
             gameMode = 4;
             stopMode++;
-            gamemodetext.text = "RandomSpeed";
+            gamemodetext.text = "[왜 빨라졌다 이러냐이거]\r\n공이 부딪힐때마다 속도가 바뀝니다!";
             checkTime = 0;
         }
     }

@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 693a2218a1a24b74c9d6edea2af7a4da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
   StartMove: 0
   ball: {fileID: 1565636275186713949}
   duration: 2
+  Manager: {fileID: 0}
 --- !u!58 &2727855162548171418
 CircleCollider2D:
   m_ObjectHideFlags: 0
