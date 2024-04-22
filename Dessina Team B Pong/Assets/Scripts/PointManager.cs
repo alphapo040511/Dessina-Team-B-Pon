@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class PointManager : MonoBehaviour
 {
     public GameObject ballManager;
+    public GameObject gameManager;
+    public GameObject subWin;
+    public GameObject wall;
     public int point;
     public Text pointUI;
 
@@ -21,14 +24,25 @@ public class PointManager : MonoBehaviour
         if(collision.transform.tag == "Ball")
         {
             Destroy(collision.gameObject);
-            Invoke("Respawn", 1);
             point++;
             pointUI.text = point.ToString();
+            if (point < 3)
+            {
+                subWin.SetActive(true);
+                Invoke("SubWinTrun", 3f);
+            }
         }
     }
 
     private void Respawn()
     {if(point <3)
-        ballManager.GetComponent<BallManager>().Spawn();
+        gameManager.GetComponent<GameManagr>().reStart = true;
+    }
+
+    private void SubWinTrun()
+    {
+        Invoke("Respawn", 1);
+        subWin.SetActive(false);
+        wall.gameObject.SetActive(false);
     }
 }

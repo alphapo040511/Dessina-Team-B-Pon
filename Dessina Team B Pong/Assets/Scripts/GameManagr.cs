@@ -11,12 +11,16 @@ public class GameManagr : MonoBehaviour
     public bool Roulette = true;
     public GameObject leftPoint;
     public GameObject rightPoint;
+    public GameObject wall;
+    public GameObject rightP;
+    public GameObject leftP;
     public int gameMode;
     public float checkTime;
     public bool input = false;
     public Text gamemodetext;
     public Image gamemodeImage;
     public Image gamemodeImage2;
+    public Image gamemodeImage3;
     public bool gameStart = false;
     public GameObject rightWin;
     public GameObject leftWin;
@@ -28,8 +32,10 @@ public class GameManagr : MonoBehaviour
     public Sprite invisibleBall_Image;
     public Sprite randomSpeed_Image;
 
-    private bool stopRoutine = false;
+    private bool first = true;
+
     bool stop = false;
+    public bool reStart = true;
 
     private Image thisImage;
 
@@ -37,13 +43,41 @@ public class GameManagr : MonoBehaviour
     void Start()
     {
         thisImage = gamemodeImage2.GetComponent<Image>();
-        StartCoroutine(RouletteTimer());
-        stopNumber = Random.Range(1000, 1200);
+        reStart = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (reStart)
+        {
+            gamemodetext.text = "";
+            reStart = false;
+            checkTime = 0;
+            stopMode = 0;
+            stopNumber = Random.Range(1000, 1200);
+            Roulette = true;
+            if (first == true)
+            {
+                
+                first = false;
+                StartCoroutine(RouletteTimer());
+            }
+            else if(first == false)
+            {
+                rightP.gameObject.SetActive(false);
+                leftP.gameObject.SetActive(false);
+                wall.gameObject.SetActive(false);
+           
+                gamemodetext.DOFade(1f, 1f);
+                gamemodeImage2.DOFade(1f, 1f);
+                gamemodeImage3.DOFade(1f, 1f);
+                gamemodeImage.DOFade(1f, 1f).OnComplete(() => StartCoroutine(RouletteTimer()));
+            }
+ 
+        }
        if(rightPoint.GetComponent<PointManager>().point == 3)
         {
             gameStart = false;
@@ -58,18 +92,20 @@ public class GameManagr : MonoBehaviour
             Invoke("GameEnd", 3);
         }
 
-        if (stopMode >= stopNumber)
+        if (stopMode >= stopNumber && Roulette == true)
         {
             Roulette = false;
+            if (gameMode == 1)
+                gamemodetext.text = "[?????????BRO]\r\n?? ?????? ??? ?????!";
+            if (gameMode == 2)
+                gamemodetext.text = "[? ??????????]\r\n???? ??? ???? ??????!";
+            if (gameMode == 3)
+                gamemodetext.text = "[??? ??? ????]\r\n?? ???? ??????!";
+            if (gameMode == 4)
+                gamemodetext.text = "[? ???? ?????]\r\n?? ?????? ??? ????!";
 
 
-            if (stopRoutine == false)
-            {
-                Debug.Log("start");
-                stopRoutine = true;
-                //StartCoroutine(UIBlink());
-            }
-            Invoke("GameStart", 1.5f);
+            Invoke("GameStart", 2f);
         }
 
         if(checkTime >= 0.1f)
@@ -78,62 +114,31 @@ public class GameManagr : MonoBehaviour
             gamemodeImage2.gameObject.SetActive(true);
             gameMode = 1;
             stopMode++;
-            gamemodetext.text = "[소방차는멈추지않아BRO]\r\n공이 부딪힐때마다 속도가 빨라집니다!";
+           
         }
         if (checkTime >= 0.2f)
         {
             thisImage.sprite = wall_Image;
             gameMode = 2;
             stopMode++;
-            gamemodetext.text = "[넌 못찌나간다아아아아ㅏ]\r\n스테이지 중앙에 움직이는 벽이생깁니다!";
+            
         }
         if (checkTime >= 0.3f)
         {
             thisImage.sprite = invisibleBall_Image;
             gameMode = 3;
             stopMode++;
-            gamemodetext.text = "[어뭐야 이거왜 투명해져]\r\n공이 중간중간 투명해집니다!";
+            
         }
         if (checkTime >= 0.4f)
         {
             thisImage.sprite = randomSpeed_Image;
             gameMode = 4;
             stopMode++;
-            gamemodetext.text = "[왜 빨라졌다 이러냐이거]\r\n공이 부딪힐때마다 속도가 바뀝니다!";
+            
             checkTime = 0;
         }
     }
-
-/*    private IEnumerator UIBlink()
-    {
-
-
-        float checkTime2 = 0;
-        float time = 0.3f;
-
-        while (checkTime2 <= time)
-        {
-            checkTime2 += Time.deltaTime;
-            yield return null;
-        }
-        gamemodetext.gameObject.SetActive(false);
-        gamemodeImage2.gameObject.SetActive(false);
-
-        checkTime2 = 0;
-
-        while (checkTime2 <= time)
-        {
-            checkTime2 += Time.deltaTime;
-            yield return null;
-        }
-        gamemodetext.gameObject.SetActive(true);
-        gamemodeImage2.gameObject.SetActive(true);
-
-        Debug.Log("while");
-
-        if (stop == false)
-        StartCoroutine(UIBlink());
-    }*/
 
     private IEnumerator RouletteTimer()
     {
@@ -148,9 +153,11 @@ public class GameManagr : MonoBehaviour
     private void GameStart()
     {
         stop = true;
+        
 
         gamemodetext.DOFade(0f, 2f);
         gamemodeImage2.DOFade(0f, 2f);
+        gamemodeImage3.DOFade(0f, 2f);
         gamemodeImage.DOFade(0f, 2f).OnComplete(() => gameStart = true);
     }
 

@@ -14,6 +14,7 @@ public class BallManager : MonoBehaviour
     public Text countUI;
     private bool isStart = false;
     public GameObject Wall;
+    public bool PlayerFreeze = false;
 
     //WallMoving 에서 사용할 수 있도록 public으로 변수 선언
     public float checkTime = 0;         // 카운트다운을 체크하는 시간 변수 선언
@@ -28,23 +29,29 @@ public class BallManager : MonoBehaviour
     void Update()
     {
        
-        if (gameManager.GetComponent<GameManagr>().gameStart == true && isStart == false)
+        if (gameManager.GetComponent<GameManagr>().gameStart == true)
         {
-            isStart = true;
+
+
             rightP.SetActive(true);
+            rightP.transform.position = new Vector3(20, 0, -1);
             leftP.SetActive(true);
+            leftP.transform.position = new Vector3(-20, 0, -1);
             if (gameManager.GetComponent<GameManagr>().gameMode == 2)
             {
                 Wall.SetActive(true);
+                Wall.transform.position = new Vector3 (0, 0, 0);
             }
+
             Spawn();
-            //StartCoroutine(StartBall());
+            gameManager.GetComponent<GameManagr>().gameStart = false;
         }
 
     }
 
     public void Spawn()
     {
+        PlayerFreeze = true;
         if (gameManager.GetComponent<GameManagr>().gameStart == true)
         {
             // 공 프리팹을 리소스에서 로드합니다.
@@ -87,6 +94,7 @@ public class BallManager : MonoBehaviour
         }
         // 카운트다운이 종료되면 UI를 비활성화하고 공의 이동을 시작합니다.
         countUI.enabled = false;
+        PlayerFreeze = false;
         ball.GetComponent<BallMoving>().StartMove = true; // BallMoving 스크립트의 StartMove를 활성화합니다.
         yield break; // 코루틴을 종료합니다.
     }

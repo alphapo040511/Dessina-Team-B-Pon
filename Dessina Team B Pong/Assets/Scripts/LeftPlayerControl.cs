@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LeftPlayerControl : MonoBehaviour
 {
+    public GameObject ballManager;
     public float moveSpeed = 20f;
     Vector2 moveDir;
 
@@ -16,27 +17,30 @@ public class LeftPlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveDir = new Vector2(Input.GetAxisRaw("LeftPlayerHorizontal") * moveSpeed * Time.deltaTime, Input.GetAxisRaw("LeftPlayerVertical") * moveSpeed * Time.deltaTime);
-        transform.Translate(moveDir);
-
-        if (gameObject.transform.position.x < -25.5)
+        if (ballManager.GetComponent<BallManager>().PlayerFreeze == false)
         {
-            transform.position = new Vector2(-25.5f, transform.position.y);
-        }
+            moveDir = new Vector2(Input.GetAxisRaw("LeftPlayerHorizontal") * moveSpeed * Time.deltaTime, Input.GetAxisRaw("LeftPlayerVertical") * moveSpeed * Time.deltaTime);
+            transform.Translate(moveDir);
 
-        if (gameObject.transform.position.x > -1.5)
-        {
-            transform.position = new Vector2(-1.5f, transform.position.y);
-        }
+            if (gameObject.transform.position.x < -25.5)
+            {
+                transform.position = new Vector2(-25.5f, transform.position.y);
+            }
 
-        if(gameObject.transform.position.y < -10.5)
-        {
-            transform.position = new Vector2(transform.position.x, -10.5f);
-        }
+            if (gameObject.transform.position.x > -1.5)
+            {
+                transform.position = new Vector2(-1.5f, transform.position.y);
+            }
 
-        if (gameObject.transform.position.y > 10.5)
-        {
-            transform.position = new Vector2(transform.position.x, 10.5f);
+            if (gameObject.transform.position.y < -10.5)
+            {
+                transform.position = new Vector2(transform.position.x, -10.5f);
+            }
+
+            if (gameObject.transform.position.y > 10.5)
+            {
+                transform.position = new Vector2(transform.position.x, 10.5f);
+            }
         }
     }
 }
