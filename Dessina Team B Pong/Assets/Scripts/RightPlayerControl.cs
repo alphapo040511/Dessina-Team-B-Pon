@@ -16,7 +16,8 @@ public class RightPlayerControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {if (ballManager.GetComponent<BallManager>().PlayerFreeze == false)
+    {
+        if (ballManager.GetComponent<BallManager>().PlayerFreeze == false)
         {
             moveDir = new Vector2(Input.GetAxisRaw("RightPlayerHorizontal") * moveSpeed * Time.deltaTime, Input.GetAxisRaw("RightPlayerVertical") * moveSpeed * Time.deltaTime);
             transform.Translate(moveDir);

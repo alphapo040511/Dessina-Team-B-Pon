@@ -8,7 +8,7 @@ public class PointManager : MonoBehaviour
     public GameObject ballManager;
     public GameObject gameManager;
     public GameObject subWin;
-    public GameObject wall;
+
     public int point;
     public Text pointUI;
 
@@ -43,6 +43,6 @@ public class PointManager : MonoBehaviour
     {
         Invoke("Respawn", 1);
         subWin.SetActive(false);
-        wall.gameObject.SetActive(false);
+
     }
 }
