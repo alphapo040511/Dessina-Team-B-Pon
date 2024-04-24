@@ -25,8 +25,8 @@ public class GameManagr : MonoBehaviour
     public bool gameStart = false;
     public GameObject rightWin;
     public GameObject leftWin;
-    private float stopNumber;
-    public float stopMode;
+    private int stopNumber;
+    public float stopTime;
 
     public Sprite speedUp_Image;
     public Sprite wall_Image;
@@ -57,8 +57,8 @@ public class GameManagr : MonoBehaviour
             gamemodetext.text = "";
             reStart = false;
             checkTime = 0;
-            stopMode = 0;
-            stopNumber = Random.Range(300, 600);
+            stopTime = 0;
+            stopNumber = Random.Range(1, 5);
             Roulette = true;
             if (first == true)
             {
@@ -93,7 +93,7 @@ public class GameManagr : MonoBehaviour
             Invoke("GameEnd", 3);
         }
 
-        if (stopMode >= stopNumber && Roulette == true)
+        if (stopTime >= 2.5f && gameMode == stopNumber && Roulette == true)
         {
             Roulette = false;
             if (gameMode == 1)
@@ -114,26 +114,25 @@ public class GameManagr : MonoBehaviour
             thisImage.sprite = speedUp_Image;
             gamemodeImage2.gameObject.SetActive(true);
             gameMode = 1;
-            stopMode ++;
-           
+            stopTime += Time.deltaTime;
         }
         if (checkTime >= 0.2f)
         {
             thisImage.sprite = wall_Image;
             gameMode = 2;
-            stopMode ++;
+            stopTime += Time.deltaTime;
         }
         if (checkTime >= 0.3f)
         {
             thisImage.sprite = invisibleBall_Image;
             gameMode = 3;
-            stopMode ++;
+            stopTime += Time.deltaTime;
         }
         if (checkTime >= 0.4f)
         {
             thisImage.sprite = randomSpeed_Image;
             gameMode = 4;
-            stopMode ++;
+            stopTime += Time.deltaTime;
             checkTime = 0;
         }
     }
