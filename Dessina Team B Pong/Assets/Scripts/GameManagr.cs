@@ -25,8 +25,8 @@ public class GameManagr : MonoBehaviour
     public bool gameStart = false;
     public GameObject rightWin;
     public GameObject leftWin;
-    private int stopNumber;
-    public int stopMode;
+    private float stopNumber;
+    public float stopMode;
 
     public Sprite speedUp_Image;
     public Sprite wall_Image;
@@ -58,7 +58,7 @@ public class GameManagr : MonoBehaviour
             reStart = false;
             checkTime = 0;
             stopMode = 0;
-            stopNumber = Random.Range(1000, 1200);
+            stopNumber = Random.Range(300, 600);
             Roulette = true;
             if (first == true)
             {
@@ -97,13 +97,13 @@ public class GameManagr : MonoBehaviour
         {
             Roulette = false;
             if (gameMode == 1)
-                gamemodetext.text = "[?????????BRO]\r\n?? ?????? ??? ?????!";
+                gamemodetext.text = "[소방차는멈추지않아BRO]\r\n공이 부딪힐때마다 속도가 빨라집니다!";
             if (gameMode == 2)
-                gamemodetext.text = "[? ??????????]\r\n???? ??? ???? ??????!";
+                gamemodetext.text = "[넌 못찌나간다아아아아ㅏ]\r\n스테이지 중앙에 움직이는 벽이생깁니다!";
             if (gameMode == 3)
-                gamemodetext.text = "[??? ??? ????]\r\n?? ???? ??????!";
+                gamemodetext.text = "[어뭐야 이거왜 투명해져]\r\n공이 중간중간 투명해집니다!";
             if (gameMode == 4)
-                gamemodetext.text = "[? ???? ?????]\r\n?? ?????? ??? ????!";
+                gamemodetext.text = "[왜 빨라졌다 이러냐이거]\r\n공이 부딪힐때마다 속도가 바뀝니다!";
 
 
             Invoke("GameStart", 2f);
@@ -114,29 +114,26 @@ public class GameManagr : MonoBehaviour
             thisImage.sprite = speedUp_Image;
             gamemodeImage2.gameObject.SetActive(true);
             gameMode = 1;
-            stopMode++;
+            stopMode ++;
            
         }
         if (checkTime >= 0.2f)
         {
             thisImage.sprite = wall_Image;
             gameMode = 2;
-            stopMode++;
-            
+            stopMode ++;
         }
         if (checkTime >= 0.3f)
         {
             thisImage.sprite = invisibleBall_Image;
             gameMode = 3;
-            stopMode++;
-            
+            stopMode ++;
         }
         if (checkTime >= 0.4f)
         {
             thisImage.sprite = randomSpeed_Image;
             gameMode = 4;
-            stopMode++;
-            
+            stopMode ++;
             checkTime = 0;
         }
     }
