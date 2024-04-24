@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManagr : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GameManagr : MonoBehaviour
     public int gameMode;
     public float checkTime;
     public bool input = false;
-    public Text gamemodetext;
+    public TMP_Text gamemodetext;
     public Image gamemodeImage;
     public Image gamemodeImage2;
     public Image gamemodeImage3;
