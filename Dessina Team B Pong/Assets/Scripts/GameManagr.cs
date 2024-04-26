@@ -97,16 +97,28 @@ public class GameManagr : MonoBehaviour
         {
             Roulette = false;
             if (gameMode == 1)
+            {
                 gamemodetext.text = "[소방차는멈추지않아BRO]\r\n공이 부딪힐때마다 속도가 빨라집니다!";
+                thisImage.sprite = speedUp_Image;
+            }
             if (gameMode == 2)
+            {
                 gamemodetext.text = "[넌 못찌나간다아아아아ㅏ]\r\n스테이지 중앙에 움직이는 벽이생깁니다!";
+                thisImage.sprite = wall_Image;
+            }
             if (gameMode == 3)
+            {
                 gamemodetext.text = "[어뭐야 이거왜 투명해져]\r\n공이 중간중간 투명해집니다!";
+                thisImage.sprite = invisibleBall_Image;
+            }
             if (gameMode == 4)
+            {
                 gamemodetext.text = "[왜 빨라졌다 이러냐이거]\r\n공이 부딪힐때마다 속도가 바뀝니다!";
+                thisImage.sprite = randomSpeed_Image;
+            }
 
 
-            Invoke("GameStart", 2f);
+                Invoke("GameStart", 2f);
         }
 
         if(checkTime >= 0.1f)
