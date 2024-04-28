@@ -12,7 +12,6 @@ public class BallManager : MonoBehaviour
     public GameObject leftP;
     public GameObject ball;
     public Text countUI;
-    private bool isStart = false;
     public GameObject Wall;
     public bool PlayerFreeze = false;
 

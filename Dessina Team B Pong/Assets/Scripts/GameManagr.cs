@@ -35,7 +35,7 @@ public class GameManagr : MonoBehaviour
 
     private bool first = true;
 
-    bool stop = false;
+
     public bool reStart = true;
 
     private Image thisImage;
@@ -161,7 +161,6 @@ public class GameManagr : MonoBehaviour
 
     private void GameStart()
     {
-        stop = true;
         
 
         gamemodetext.DOFade(0f, 2f);
