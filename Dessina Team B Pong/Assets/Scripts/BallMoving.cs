@@ -7,15 +7,18 @@ using DG.Tweening;
 public class BallMoving : MonoBehaviour
 {
     public float ballSpeed = 50f;
-    public int RLDirection;
-    public int UDDirection = -1;
+    public float RLDirection;
+    public float UDDirection = -1;
     public bool StartMove = false;
     public Renderer ball;
     public float duration = 2f;
     public GameObject Manager;
     private int mode;
 
-
+    private void Awake()
+    {
+        Time.fixedDeltaTime = 0.005f;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,10 +62,12 @@ public class BallMoving : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            RLDirection *= -1;
+            float temp = Mathf.Sign(RLDirection);
+            RLDirection = Random.Range(0.8f, 1.2f);
+            RLDirection *= -1 * temp;
 
             if(mode == 1)
-            ballSpeed += 3f;            //Player에 닿을 때마다 공의 속도가 3씩 증가함
+            ballSpeed += 3f;            //Player?? ???? ?????? ???? ?????? 3?? ??????
 
             if(mode == 4) 
             {
@@ -72,7 +77,9 @@ public class BallMoving : MonoBehaviour
 
         if (collision.transform.tag == "Wall")
         {
-            UDDirection *= -1;
+            float temp = Mathf.Sign(UDDirection);
+            UDDirection = Random.Range(0.8f, 1.2f);
+            UDDirection *= -1 * temp;
         }
     }
 

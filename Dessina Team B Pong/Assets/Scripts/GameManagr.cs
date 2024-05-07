@@ -34,6 +34,7 @@ public class GameManagr : MonoBehaviour
     public Sprite randomSpeed_Image;
 
     private bool first = true;
+    private int bfMode = 0;
 
     bool stop = false;
     public bool reStart = true;
@@ -58,7 +59,12 @@ public class GameManagr : MonoBehaviour
             reStart = false;
             checkTime = 0;
             stopTime = 0;
-            stopNumber = Random.Range(1, 5);
+            for (; stopNumber == bfMode;)
+            {
+                Debug.Log("SameMode");
+                stopNumber = Random.Range(1, 5);
+            }
+            
             Roulette = true;
             if (first == true)
             {
@@ -98,21 +104,25 @@ public class GameManagr : MonoBehaviour
             Roulette = false;
             if (gameMode == 1)
             {
+                bfMode = gameMode;
                 gamemodetext.text = "[소방차는멈추지않아BRO]\r\n공이 부딪힐때마다 속도가 빨라집니다!";
                 thisImage.sprite = speedUp_Image;
             }
             if (gameMode == 2)
             {
+                bfMode = gameMode;
                 gamemodetext.text = "[넌 못찌나간다아아아아ㅏ]\r\n스테이지 중앙에 움직이는 벽이생깁니다!";
                 thisImage.sprite = wall_Image;
             }
             if (gameMode == 3)
             {
+                bfMode = gameMode;
                 gamemodetext.text = "[어뭐야 이거왜 투명해져]\r\n공이 중간중간 투명해집니다!";
                 thisImage.sprite = invisibleBall_Image;
             }
             if (gameMode == 4)
             {
+                bfMode = gameMode;
                 gamemodetext.text = "[왜 빨라졌다 이러냐이거]\r\n공이 부딪힐때마다 속도가 바뀝니다!";
                 thisImage.sprite = randomSpeed_Image;
             }
@@ -162,8 +172,6 @@ public class GameManagr : MonoBehaviour
     private void GameStart()
     {
         stop = true;
-        
-
         gamemodetext.DOFade(0f, 2f);
         gamemodeImage2.DOFade(0f, 2f);
         gamemodeImage3.DOFade(0f, 2f);
