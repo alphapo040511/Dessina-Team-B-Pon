@@ -21,7 +21,7 @@ public class StartButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown)
+        if(Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
         {
             time = 0.1f;
             
