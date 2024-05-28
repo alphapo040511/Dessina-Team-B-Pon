@@ -60,11 +60,9 @@ public class BallMoving : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "LeftPlayer")
         {
-            float temp = Mathf.Sign(RLDirection);
-            RLDirection = Random.Range(0.8f, 1.2f);
-            RLDirection *= -1 * temp;
+            RLDirection = 1;
 
             if(mode == 1)
             ballSpeed += 3f;            //Player?? ???? ?????? ???? ?????? 3?? ??????
@@ -72,6 +70,32 @@ public class BallMoving : MonoBehaviour
             if(mode == 4) 
             {
                 ballSpeed = Random.Range(10f,30f);
+            }
+        }
+
+        if (collision.transform.tag == "RightPlayer")
+        {
+            RLDirection = -1;
+
+            if (mode == 1)
+                ballSpeed += 3f;            //Player?? ???? ?????? ???? ?????? 3?? ??????
+
+            if (mode == 4)
+            {
+                ballSpeed = Random.Range(10f, 30f);
+            }
+        }
+
+        if (collision.transform.tag == "MoveWall")
+        {
+            RLDirection *= -1;
+
+            if (mode == 1)
+                ballSpeed += 3f;            //Player?? ???? ?????? ???? ?????? 3?? ??????
+
+            if (mode == 4)
+            {
+                ballSpeed = Random.Range(10f, 30f);
             }
         }
 

@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 294637279}
   m_Layer: 0
   m_Name: LeftPlayer
-  m_TagString: Player
+  m_TagString: LeftPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2200,7 +2200,7 @@ GameObject:
   - component: {fileID: 1177998505}
   m_Layer: 0
   m_Name: RightPlayer
-  m_TagString: Player
+  m_TagString: RightPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2781,7 +2781,7 @@ GameObject:
   - component: {fileID: 1731313487}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Player
+  m_TagString: MoveWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
