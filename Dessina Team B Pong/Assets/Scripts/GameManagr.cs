@@ -59,7 +59,7 @@ public class GameManagr : MonoBehaviour
             reStart = false;
             checkTime = 0;
             stopTime = 0;
-            if (stopNumber == bfMode)
+            while (stopNumber == bfMode)
             {
                 Debug.Log("SameMode");
                 stopNumber = Random.Range(1, 5);
